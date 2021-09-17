@@ -47,7 +47,7 @@ fetch(apiUrl).then(function (response) {
   }
 
 }).catch(function (error) {
-  //Notice this '.catch' getting chained onto the end of the 'then()' method
+
   console.log(error);
   alert("Unable to connect to OpenWeather");
 });
@@ -71,14 +71,16 @@ var getWeather = function (city) {
     oneCall(data.coord.lat, data.coord.lon);
     citySearchTerm.textContent = data.name;
 
-console.log(data);
+
 
     //display current conditions
-    var currentConditionsEl = document.querySelector("#cityCurrentConditions");
+    var currentConditionsEl = document.querySelector(".cityCurrentConditions");
     currentConditionsEl.innerHTML = "";
 
-    var cityCurrentConditions = document.createElement("<p>")
-    cityCurrentConditions.setAttribute("Temp"data.current.temp, )
+    var cityCurrentConditions = document.createElement("p");
+    cityCurrentConditions.innerHTML = "Temp: " + data.main.temp + "°F", "Humidity: " + data.main.humidity;
+    currentConditionsEl.appendChild(cityCurrentConditions);
+    
 
   })
     // .catch(function (error) {
