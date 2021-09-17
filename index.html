@@ -1,36 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="assets/css/style.css">
-    <title>Weather Dashboard</title>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <title>Weather Dashboard</title>
 </head>
+
 <body>
-    <header><h1>Weather Dashboard</h1></header>
-<div class="container">
-    <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="Recipient's username" aria-label="search" aria-describedby="button-addon2">
-        <div class="input-group-append">
-          <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
+  <header class="d-flex justify-content-center">
+    <h1>Weather Dashboard</h1>
+  </header>
+  <main class="flex-row justify-space-between">
+    <h2 class="subtitle">Showing Weather Conditions for <span id="conditions-search-term"></span></h2>
+
+    <div id="conditions-container col-12 col-md-8">
+      <div class="currentConditions card list-group">
+        <div class="cityCurrentConditions card-body">
+
         </div>
       </div>
-    <div class = "locations btn-group btn-group-vertical">
-    <button class="LA">Los Angeles</button>
-    <button class="Chicago">Chicago</button>
-    <button class="Austin">Austin</button>
-    <button class="Seattle">Seattle</button>
-    <button class="Austin">Austin</button>
-    <button class="NYC">New York</button>
-</div>
+      <div class="weeklyForecast card list-group flex-row justify-space-between">
+        <div class="dayOne card-body"></div>
+        <div class="dayTwo card-body"></div>
+        <div class="dayThree card-body"></div>
+        <div class="dayFour card-body"></div>
+        <div class="dayFive card-body"></div>
+      </div>
+    </div>
+
+    <div class="search-container col-12 col-md-4">
+      <div class="card">
+        <h3 class="card-header text-uppercase">Search by City</h3>
+        <form id="user-form" class="card-body">
+          <label class="form-label" for="cityName">City name:</label>
+          <input name="cityName" id="cityNameInput" type="text" autofocus="true" class="form-input" />
+          <button type="submit" class="btn btn-primary btn-lg">Get City Weather</button>
+        </form>
+      </div>
+      
+      <div class="card btn-group btn-group-vertical" id="locations-buttons">
+        <div class="card-body">
+          <button data-cityButton="Seattle" class="btn btn-secondary btn-lg btn-width">Seattle</button>
+          <button data-cityButton="LA" class="btn btn-secondary btn-lg btn-width">Los Angeles</button>
+          <button data-cityButton="Santa-Barbara" class="btn btn-secondary btn-lg btn-width">Santa Barbara</button>
+          <button data-cityButton="Nola" class="btn btn-secondary btn-lg btn-width">New Orleans</button>
+          <button data-cityButton="Chicago" class="btn btn-secondary btn-lg btn-width">Chicago</button>
+          <button data-cityButton="NYC" class="btn btn-secondary btn-lg btn-width">New York</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  </div>
 
 
 
 
-</div>
- <script src="assets/js/script.js"></script>   
+  </div>
+
+  <script src="assets/js/script.js"></script>
 </body>
+
 </html>
