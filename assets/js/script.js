@@ -29,7 +29,7 @@ var buttonClickHandler = function (event) {
   }
 };
 
-//fetch coordinate api
+//fetch coordinates api
 function oneCall(lat, lon) {
 var apiUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat='+ lat + '&lon=' + lon + '&units=imperial&appid=23d40c242866a0b133662ed347c4e80e'
 fetch(apiUrl).then(function (response) {
@@ -71,6 +71,15 @@ var getWeather = function (city) {
     oneCall(data.coord.lat, data.coord.lon);
     citySearchTerm.textContent = data.name;
 
+console.log(data);
+
+    //display current conditions
+    var currentConditionsEl = document.querySelector("#cityCurrentConditions");
+    currentConditionsEl.innerHTML = "";
+
+    var cityCurrentConditions = document.createElement("<p>")
+    cityCurrentConditions.setAttribute("Temp"data.current.temp, )
+
   })
     // .catch(function (error) {
     //   //Notice this '.catch' getting chained onto the end of the 'then()' method
@@ -79,38 +88,48 @@ var getWeather = function (city) {
     // });
 }
 
-var displayWeather = function (conditions, searchTerm) {
-  //check if api returned any repos
-  if (conditions.length === 0) {
-    cityContainerEl.textContent = "No city found.";
-  }
-
-  console.log(conditions);
-  console.log(searchTerm);
-
-  //clear old content
-  cityContainerEl.textContent = "";
-  citySearchTerm.textContent = searchTerm;
-
-  //format condition name
-  var conditionsName = conditions[i].owner.login + "/" + conditions[i].name;
-
-  //create a container for each conditions
-  var conditionsEl = document.createElement("div");
-  conditionsEl.classList = "list-item flex-row justify-space-between align-center";
-
-  //create a span element to hold conditions name
-  var titleEl = document.createElement("span");
-  titleEl.textContent = conditionsName;
-
-  //apend to container 
-  conditionsEl.appendChild(titleEl);
-
-  //append container to the dom
-  conditionsContainerEl.appendChild(conditionsEl)
 
 
-};
+
+
+
+
+
+
+
+
+// var displayWeather = function (conditions, searchTerm) {
+//   //check if api returned any repos
+//   if (conditions.length === 0) {
+//     cityContainerEl.textContent = "No city found.";
+//   }
+
+//   console.log(conditions);
+//   console.log(searchTerm);
+
+//   //clear old content
+//   cityContainerEl.textContent = "";
+//   citySearchTerm.textContent = searchTerm;
+
+//   //format condition name
+//   var conditionsName = conditions[i].owner.login + "/" + conditions[i].name;
+
+//   //create a container for each conditions
+//   var conditionsEl = document.createElement("div");
+//   conditionsEl.classList = "list-item flex-row justify-space-between align-center";
+
+//   //create a span element to hold conditions name
+//   var titleEl = document.createElement("span");
+//   titleEl.textContent = conditionsName;
+
+//   //apend to container 
+//   conditionsEl.appendChild(titleEl);
+
+//   //append container to the dom
+//   conditionsContainerEl.appendChild(conditionsEl)
+
+
+// };
 
 //add event listeners to the form
 cityFormEl.addEventListener("submit", formSubmitHandler);
