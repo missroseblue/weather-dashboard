@@ -26,9 +26,6 @@ var buttonClickHandler = function (event) {
   console.log(cityButtons)
   if (cityButtons) {
     getWeather(cityButtons);
-
-    // // clear old content
-    // locationButtonsEL.textContent = "";
   }
 };
 
@@ -78,10 +75,22 @@ var getWeather = function (city) {
     var currentConditionsEl = document.querySelector(".cityCurrentConditions");
     currentConditionsEl.innerHTML = "";
 
-    var cityCurrentConditions = document.createElement("p");
-    cityCurrentConditions.innerHTML = "Temp: " + data.main.temp;
-    currentConditionsEl.appendChild(cityCurrentConditions);
+    var cityNameTitle = document.createElement("h2");
+    var dateNow = moment().format("dddd, MMMM D, YYYY")
+    cityNameTitle.innerHTML = data.name + " " + dateNow;
+    currentConditionsEl.appendChild(cityNameTitle);
+
+    var cityTemp = document.createElement("p");
+    cityTemp.innerHTML = "Temp: " + data.main.temp;
+    currentConditionsEl.appendChild(cityTemp);
+
+    var cityHumidity = document.createElement("p");
+    cityHumidity.innerHTML = "Humidity: " + data.main.humidity + "%";
+    currentConditionsEl.appendChild(cityHumidity);
     
+    var cityWind = document.createElement("p");
+    cityWind.innerHTML = "Wind: " + Math.ceil(data.wind.speed) + " mph";
+    currentConditionsEl.appendChild(cityWind);
 
   })
     // .catch(function (error) {
