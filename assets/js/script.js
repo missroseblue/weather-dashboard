@@ -1,13 +1,16 @@
 var cityFormEl = document.querySelector("#user-form");
+var locationButtonsEL = document.querySelector('#locations-buttons')
 var cityInputEl = document.querySelector("#cityNameInput");
 var cityContainerEl = document.querySelector("#conditions-container");
 var citySearchTerm = document.querySelector("#conditions-search-term");
-var locationButtonsEL = document.querySelector('#locations-buttons')
+
 
 var formSubmitHandler = function (event) {
   event.preventDefault();
+
   //iterate through response data
   var cityNameInput = cityInputEl.value.trim();
+
   if (cityNameInput) {
     getWeather(cityNameInput);
     cityInputEl.value = "";
@@ -18,14 +21,14 @@ var formSubmitHandler = function (event) {
 };
 
 var buttonClickHandler = function (event) {
-  // get the language attribute from the clicked element
-  var cityButton = event.target.getAttribute("data-cityButton");
-  console.log(cityButton)
-  if (cityButton) {
-    getFeaturedRepos(cityButton);
+  // get the city from the clicked element
+  var cityButtons = event.target.getAttribute("data-cityButton");
+  console.log(cityButtons)
+  if (cityButtons) {
+    getWeather(cityButtons);
 
-    // clear old content
-    cityContainerEl.textContent = "";
+    // // clear old content
+    // locationButtonsEL.textContent = "";
   }
 };
 
@@ -47,7 +50,7 @@ fetch(apiUrl).then(function (response) {
   }
 
 }).catch(function (error) {
-
+  //Notice this '.catch' getting chained onto the end of the 'then()' method
   console.log(error);
   alert("Unable to connect to OpenWeather");
 });
@@ -71,14 +74,12 @@ var getWeather = function (city) {
     oneCall(data.coord.lat, data.coord.lon);
     citySearchTerm.textContent = data.name;
 
-
-
     //display current conditions
     var currentConditionsEl = document.querySelector(".cityCurrentConditions");
     currentConditionsEl.innerHTML = "";
 
     var cityCurrentConditions = document.createElement("p");
-    cityCurrentConditions.innerHTML = "Temp: " + data.main.temp + "°F", "Humidity: " + data.main.humidity;
+    cityCurrentConditions.innerHTML = "Temp: " + data.main.temp;
     currentConditionsEl.appendChild(cityCurrentConditions);
     
 
