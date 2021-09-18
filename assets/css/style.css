@@ -1,9 +1,9 @@
 :root {
-    --primary: #D5DED9;
-    --secondary: #D9CEB2;
-    --terciary: #99B2B7;
-    --light-dark: #948C75;
-    --dark: #7A6A53;
+    --primary: #EBE3AA;
+    --secondary: #CAD7B2;
+    --terciary: #A8CABA;
+    --light-dark: #838689;
+    --dark: #5D4157;
     --border-radius: .3rem;
 }
 /*BODY*/
@@ -31,7 +31,10 @@ body {
   }
   .card-body {
     padding: 2.5%;
+    width: 100%;
   }
+
+  
 
   /*FORM*/
   .form-label,
@@ -75,7 +78,7 @@ body {
     width: 100%;
   }
    .btn:hover {
-    color: var(--primary);
+    color: var(--terciary);
     background-color: var(--tertiary);
     transform: translate(0, 0);
     box-shadow: 2px 2px var(--dark);
@@ -83,7 +86,7 @@ body {
   .btn-inline {
     display: inline;
   }
-  
+
   .btn-back {
     border-radius: var(--border-radius);
     color: var(--primary);

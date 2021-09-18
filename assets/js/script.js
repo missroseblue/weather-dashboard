@@ -102,7 +102,11 @@ var getWeather = function (city) {
 
 
 
+//add event listeners to the form
+cityFormEl.addEventListener("submit", formSubmitHandler);
 
+//add event listeners to buttons
+locationButtonsEL.addEventListener("click", buttonClickHandler);
 
 
 
@@ -143,11 +147,7 @@ var getWeather = function (city) {
 
 // };
 
-//add event listeners to the form
-cityFormEl.addEventListener("submit", formSubmitHandler);
 
-//add event listeners to buttons
-locationButtonsEL.addEventListener("click", buttonClickHandler);
 
 
 
