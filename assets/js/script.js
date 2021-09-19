@@ -3,6 +3,8 @@ var locationButtonsEL = document.querySelector('#locations-buttons')
 var cityInputEl = document.querySelector("#cityNameInput");
 var cityContainerEl = document.querySelector("#conditions-container");
 var citySearchTerm = document.querySelector("#conditions-search-term");
+var currentConditionsEl = document.querySelector(".cityCurrentConditions");
+   
 
 
 var formSubmitHandler = function (event) {
@@ -12,7 +14,7 @@ var formSubmitHandler = function (event) {
   var cityNameInput = cityInputEl.value.trim();
 
   if (cityNameInput) {
-    getWeather(cityNameInput);
+    getCity(cityNameInput);
     cityInputEl.value = "";
   }
   else {
@@ -25,37 +27,14 @@ var buttonClickHandler = function (event) {
   var cityButtons = event.target.getAttribute("data-cityButton");
   console.log(cityButtons)
   if (cityButtons) {
-    getWeather(cityButtons);
+    getCity(cityButtons);
   }
 };
 
-//fetch coordinates api
-function oneCall(lat, lon) {
-var apiUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat='+ lat + '&lon=' + lon + '&units=imperial&appid=23d40c242866a0b133662ed347c4e80e'
-fetch(apiUrl).then(function (response) {
-  if (response.ok) {
-    return response.json()
-  } else { 
-  console.log("oneCall error")
-  }
-}).then(function (data) {
-  console.log(data);
 
-  for (i=0; i< 5; i++) {
-    console.log(data.daily[i].temp.day);
-
-  }
-
-}).catch(function (error) {
-  //Notice this '.catch' getting chained onto the end of the 'then()' method
-  console.log(error);
-  alert("Unable to connect to OpenWeather");
-});
-
-}
 
 //fetch City API
-var getWeather = function (city) {
+var getCity = function (city) {
   var weatherUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=23d40c242866a0b133662ed347c4e80e&units=imperial'
 
   fetch(weatherUrl).then(function (response) {
@@ -71,26 +50,11 @@ var getWeather = function (city) {
     oneCall(data.coord.lat, data.coord.lon);
     citySearchTerm.textContent = data.name;
 
-    //display current conditions
-    var currentConditionsEl = document.querySelector(".cityCurrentConditions");
     currentConditionsEl.innerHTML = "";
-
     var cityNameTitle = document.createElement("h2");
     var dateNow = moment().format("dddd, MMMM D, YYYY")
     cityNameTitle.innerHTML = data.name + " " + dateNow;
     currentConditionsEl.appendChild(cityNameTitle);
-
-    var cityTemp = document.createElement("p");
-    cityTemp.innerHTML = "Temp: " + data.main.temp;
-    currentConditionsEl.appendChild(cityTemp);
-
-    var cityHumidity = document.createElement("p");
-    cityHumidity.innerHTML = "Humidity: " + data.main.humidity + "%";
-    currentConditionsEl.appendChild(cityHumidity);
-    
-    var cityWind = document.createElement("p");
-    cityWind.innerHTML = "Wind: " + Math.ceil(data.wind.speed) + " mph";
-    currentConditionsEl.appendChild(cityWind);
 
   })
     // .catch(function (error) {
@@ -99,6 +63,50 @@ var getWeather = function (city) {
     //   alert("Unable to connect to OpenWeather");
     // });
 }
+
+//fetch coordinates api
+function oneCall(lat, lon) {
+  var apiUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat='+ lat + '&lon=' + lon + '&units=imperial&appid=23d40c242866a0b133662ed347c4e80e'
+  fetch(apiUrl).then(function (response) {
+    if (response.ok) {
+      return response.json()
+    } else { 
+    console.log("oneCall error")
+    }
+  }).then(function (data) {
+    console.log(data);
+  
+    for (i=0; i< 5; i++) {
+      console.log(data.daily[i].temp.day);
+  
+    }
+       //display current conditions
+   
+   var cityTemp = document.createElement("p");
+   cityTemp.innerHTML = "Temp: " + data.current.temp;
+   currentConditionsEl.appendChild(cityTemp);
+
+   var cityHumidity = document.createElement("p");
+   cityHumidity.innerHTML = "Humidity: " + data.current.humidity + "%";
+   currentConditionsEl.appendChild(cityHumidity);
+   
+   var cityWind = document.createElement("p");
+   cityWind.innerHTML = "Wind: " + Math.ceil(data.current.wind_speed) + " mph";
+   currentConditionsEl.appendChild(cityWind);
+
+   var cityUV = document.createElement("p");
+   cityUV.innerHTML = "UV Index: " + data.current.uvi;
+   currentConditionsEl.appendChild(cityUV);
+  
+  }).catch(function (error) {
+    console.log(error);
+    alert("Unable to connect to OpenWeather");
+  });
+  
+
+
+
+  }
 
 
 
@@ -158,7 +166,7 @@ api.openweathermap.org/data/2.5/onecall?lat='+ lat + '&lon=' + lon + '&units=imp
 
 'https://api.openweathermap.org/data/2.5/weather?q=' + city +"&appid=23d40c242866a0b133662ed347c4e80e"
 
-var getWeather = function (cityNameInput) {
+var getCity = function (cityNameInput) {
   var weatherUrl = 'http://api.openweathermap.org/data/2.5/weather?q=" + cityNameInput +"&units=imperial&appid=23d40c242866a0b133662ed347c4e80e'
 fetch(weatherUrl)
   .then(response => response.json())
@@ -208,7 +216,7 @@ var responseContainerEL = $("#response-container"),
 
 
 //Add event listeners to the city buttons
-var getWeather = function() {
+var getCity = function() {
   // format the github weather url
   var weatherUrl = "api.openweathermap.org/data/2.5/weather?q=London&appid=3db667141051263a8c63655d71fb8aef"
   //"api.openweathermap.org/data/2.5/weather?q=" + cityNameInput +"&appid=3db667141051263a8c63655d71fb8aef"
