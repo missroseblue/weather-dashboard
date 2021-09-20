@@ -118,7 +118,7 @@ function oneCall(lat, lon) {
       let dayCards = ``
 
       for (var i = 0; i < 5; i++) {
-        var day = new Date(data.current.dt).toLocaleDateString("en-US")
+        var day = dayjs().add(i + 1, 'day').format('MMM-D-YYYY')
         var symbol = data.daily[i].weather[0].icon
         var temp = data.daily[i].temp.day
         var wind = data.daily[i].wind_speed
