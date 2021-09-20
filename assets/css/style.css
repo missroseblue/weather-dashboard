@@ -28,12 +28,17 @@ body {
     background-color: var(--dark);
     padding: 2.5%;
     border-radius: calc(.18rem - 1px) calc(.18rem - 1px) 0 0;
+
   }
   .card-body {
     padding: 2.5%;
     width: 100%;
   }
 
+  /*UVI Color*/
+  .bg-purple {
+    background-color: purple;
+  }
   
 
   /*FORM*/
@@ -57,6 +62,9 @@ body {
   border-radius: var(--border-radius);
 }
 
+.currentConditions, .weeklyForecast {
+  height: 300px;
+}
 /*BUTTON*/
 .btn {
     font-size: 1.3rem;
